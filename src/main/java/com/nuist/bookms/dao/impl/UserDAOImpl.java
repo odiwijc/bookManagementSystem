@@ -55,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
                         .realName(rs.getString("real_name"))
                         .phone(rs.getString("phone"))
                         .email(rs.getString("email"))
-                        .registerTime(rs.getDate("register_time"))
+                        .registerTime(rs.getTime("register_time"))
                         .status(rs.getInt("status"))
                         .build();
             }
@@ -84,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
                         .realName(rs.getString("real_name"))
                         .phone(rs.getString("phone"))
                         .email(rs.getString("email"))
-                        .registerTime(rs.getDate("register_time"))
+                        .registerTime(rs.getTime("register_time"))
                         .status(rs.getInt("status"))
                         .build();
             }
@@ -116,7 +116,7 @@ public class UserDAOImpl implements UserDAO {
                         .realName(rs.getString("real_name"))
                         .phone(rs.getString("phone"))
                         .email(rs.getString("email"))
-                        .registerTime(rs.getDate("register_time"))
+                        .registerTime(rs.getTime("register_time"))
                         .status(rs.getInt("status"))
                         .build();
                 list.add(user);
@@ -152,7 +152,7 @@ public class UserDAOImpl implements UserDAO {
                         .realName(rs.getString("real_name"))
                         .phone(rs.getString("phone"))
                         .email(rs.getString("email"))
-                        .registerTime(rs.getDate("register_time"))
+                        .registerTime(rs.getTime("register_time"))
                         .status(rs.getInt("status"))
                         .build();
                 list.add(user);

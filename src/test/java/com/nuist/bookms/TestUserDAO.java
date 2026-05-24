@@ -28,9 +28,9 @@ public class TestUserDAO {
 
     @Test
     public void testUserInsert() {
-        User user = User.builder().username("hajimi")
+        User user = User.builder().username("habixia")
                 .password("8300")
-                .realName("哈基米")
+                .realName("哈比下")
                 .phone("8300000")
                 .email("hajimi@hjm.com")
                 .status(1)
@@ -43,7 +43,7 @@ public class TestUserDAO {
 
     @Test
     public void testSelectByUsername() {
-        User user = userDAO.selectByUsername("hajimi");
+        User user = userDAO.selectByUsername("habixia");
         System.out.println(user);
     }
 

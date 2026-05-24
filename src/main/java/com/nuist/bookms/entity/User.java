@@ -18,6 +18,6 @@ public class User {
     private String realName;
     private String phone;
     private String email;
-    private Date registerTime;
+    private java.sql.Time registerTime;
     private Integer status;
 }

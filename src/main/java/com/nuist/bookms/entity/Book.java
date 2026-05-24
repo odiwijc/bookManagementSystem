@@ -17,8 +17,9 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
+    private String publisher;
     private Integer categoryId;
-    private Date publishDate;
+    private java.sql.Date publishDate;
     private Integer totalStock;
     private Integer availableStock;
     private String coverUrl;
