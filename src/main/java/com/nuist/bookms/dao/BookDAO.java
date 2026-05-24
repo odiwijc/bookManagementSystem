@@ -17,13 +17,11 @@ public interface BookDAO {
     // 根据ID查询完整图书信息
     Book selectById(int bookId);
 
-    // 分页查询图书(支持按书名、作者、ISBN、分类ID、状态等多条件模糊/精确查询)
-    // TODO BookQueryCondition是一个自定义的查询条件类，包含title, author, ISBN， categoryId， status 等可选字段。
-    // List<Book> selectByPage(int pageNum, int pageSize, BookQueryCondition condition);
+    // 分页查询图书(支持按书名、作者、ISBN、分类ID、状态等多条件模糊/精确查询) SQL语句需要动态拼接
+     List<Book> selectByPage(int pageNum, int pageSize, Book searchCondition);
 
     // 统计满足条件的图书总数
-    // TODO BookQueryCondition是一个自定义的查询条件类
-    //int selectCount(BookQueryCondition condition)
+    int selectCount(Book searchCondition);
 
     // 乐观锁扣减/归还库存
     int updateAvailableStock(int bookId, int delta, int version);
