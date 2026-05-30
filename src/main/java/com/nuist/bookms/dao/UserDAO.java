@@ -11,6 +11,9 @@ public interface UserDAO {
     // 根据用户名查询
     User selectByUsername(String username);
 
+    // 根据用户名和密码查询
+    int selectByUsernameAndPassword(String username,String password);
+
     // 根据用户id查询
     User selectByUserId(Integer userId);
 
@@ -28,4 +31,5 @@ public interface UserDAO {
 
     // 启用/禁用用户
     int updateStatus(int userId,int status);
+    
 }

@@ -23,7 +23,7 @@ public class Book {
     private Integer totalStock;
     private Integer availableStock;
     private String coverUrl;
-    private Integer status;
+    private Integer status; // 0:下架 1:上架
     private Integer version;
 
 }

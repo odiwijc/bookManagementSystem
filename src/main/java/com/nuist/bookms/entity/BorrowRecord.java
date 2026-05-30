@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,9 +14,9 @@ public class BorrowRecord {
     private Integer recordId;
     private Integer userId;
     private Integer bookId;
-    private Date borrowDate;
-    private Date dueDate;
-    private Date returnDate;
+    private java.sql.Date borrowDate;
+    private java.sql.Date dueDate;
+    private java.sql.Date returnDate;
     private Integer renewCount;
-    private Integer status;
+    private Integer status; // 1:未还 2:已还 3:逾期
 }

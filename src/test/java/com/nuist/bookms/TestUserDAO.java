@@ -85,4 +85,10 @@ public class TestUserDAO {
         int result = userDAO.updateStatus(13,1);
         System.out.println(result);
     }
+
+    @Test
+    public void testSelectByUsernameAndPassword(){
+        int result = userDAO.selectByUsernameAndPassword("admin","123456");
+        System.out.println(result);
+    }
 }

@@ -198,7 +198,7 @@ public class UserDAOImpl implements UserDAO {
 
         try (Connection c = DBUtil.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1,userId);
+            ps.setInt(1, userId);
 
             result = ps.executeUpdate();
 
@@ -216,8 +216,8 @@ public class UserDAOImpl implements UserDAO {
 
         try (Connection c = DBUtil.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1,newStatus);
-            ps.setInt(2,userId);
+            ps.setInt(1, newStatus);
+            ps.setInt(2, userId);
 
             result = ps.executeUpdate();
 
@@ -225,6 +225,25 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
         }
 
+        return result;
+    }
+
+    @Override
+    public int selectByUsernameAndPassword(String username, String password) {
+        int result = 0;
+        String sql = "select * from user where username=? and password=?";
+
+        try (Connection c = DBUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, MD5Util.getMD5(password));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 }

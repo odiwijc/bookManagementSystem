@@ -17,13 +17,14 @@ public interface BookDAO {
     // 根据ID查询完整图书信息
     Book selectById(int bookId);
 
-    // 分页查询图书(支持按书名、作者、ISBN、分类ID、状态等多条件模糊/精确查询) SQL语句需要动态拼接
+    // 分页查询图书(支持按书名、作者、分类ID、出版商、状态等多条件模糊/精确查询) SQL语句需要动态拼接
      List<Book> selectByPage(int pageNum, int pageSize, Book searchCondition);
 
-    // 统计满足条件的图书总数
+    // 统计满足条件（书名、作者、分类ID、出版商、状态）的图书总数
     int selectCount(Book searchCondition);
 
     // 乐观锁扣减/归还库存
+    // delta 是书的库存增量，正数表示借阅，负数表示归还
     int updateAvailableStock(int bookId, int delta, int version);
 
     // 悲观锁方式更新库存
