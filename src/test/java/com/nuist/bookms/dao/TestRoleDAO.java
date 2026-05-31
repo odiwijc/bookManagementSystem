@@ -1,6 +1,5 @@
-package com.nuist.bookms;
+package com.nuist.bookms.dao;
 
-import com.nuist.bookms.dao.RoleDAO;
 import com.nuist.bookms.dao.impl.RoleDAOImpl;
 import com.nuist.bookms.entity.Role;
 import org.junit.jupiter.api.Test;

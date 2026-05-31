@@ -124,4 +124,26 @@ public class PermissionDAOImpl implements PermissionDAO {
 
         return result;
     }
+
+    @Override
+    public Permission selectByName(String permName) {
+        Permission permission = null;
+        String sql = "select * from permission where permission_name = ?";
+        try (Connection c = DBUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, permName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                permission = Permission.builder()
+                        .permissionId(rs.getInt("permission_id"))
+                        .permissionName(rs.getString("permission_name"))
+                        .description(rs.getString("description"))
+                        .build();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return permission;
+    }
 }

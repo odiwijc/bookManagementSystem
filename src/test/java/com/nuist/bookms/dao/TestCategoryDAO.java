@@ -1,9 +1,7 @@
-package com.nuist.bookms;
+package com.nuist.bookms.dao;
 
-import com.nuist.bookms.dao.CategoryDAO;
 import com.nuist.bookms.dao.impl.CategoryDAOImpl;
 import com.nuist.bookms.entity.Category;
-import com.nuist.bookms.entity.Permission;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

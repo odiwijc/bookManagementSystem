@@ -49,4 +49,8 @@ public class TestUserService {
     }
 
 
+    @Test
+    public void testSelectByPage() {
+        System.out.println(userService.selectByPage(1, 10));
+    }
 }

@@ -1,6 +1,5 @@
-package com.nuist.bookms;
+package com.nuist.bookms.dao;
 
-import com.nuist.bookms.dao.PermissionDAO;
 import com.nuist.bookms.dao.impl.PermissionDAOImpl;
 import com.nuist.bookms.entity.Permission;
 import org.junit.jupiter.api.Test;
@@ -43,5 +42,11 @@ public class TestPermissionDAO {
     public void testDeleteById(){
         int result = permissionDAO.deleteById(14);
         System.out.println(result);
+    }
+
+    @Test
+    public void testSelectByName(){
+        Permission permission = permissionDAO.selectByName("user:register");
+        System.out.println(permission);
     }
 }

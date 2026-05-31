@@ -1,6 +1,5 @@
-package com.nuist.bookms;
+package com.nuist.bookms.dao;
 
-import com.nuist.bookms.dao.RolePermissionDAO;
 import com.nuist.bookms.dao.impl.RolePermissionDAOImpl;
 import com.nuist.bookms.entity.Permission;
 import org.junit.jupiter.api.Test;

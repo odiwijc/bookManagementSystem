@@ -8,6 +8,9 @@ public interface PermissionDAO {
     // 根据权限ID查询
     Permission selectById(int permId);
 
+    // 根据权限名查询
+    Permission selectByName(String permName);
+
     // 查询所有权限
     List<Permission> selectAll();
 

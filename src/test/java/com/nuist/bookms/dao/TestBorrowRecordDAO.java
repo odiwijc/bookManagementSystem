@@ -1,6 +1,5 @@
-package com.nuist.bookms;
+package com.nuist.bookms.dao;
 
-import com.nuist.bookms.dao.BorrowRecordDAO;
 import com.nuist.bookms.dao.impl.BorrowRecordDAOImpl;
 import com.nuist.bookms.entity.BorrowRecord;
 import org.junit.jupiter.api.Test;
@@ -8,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Date;
 import java.util.List;
 
-public class TestBorrowRecord {
+public class TestBorrowRecordDAO {
     private BorrowRecordDAO borrowRecordDAO = new BorrowRecordDAOImpl();
 
     @Test

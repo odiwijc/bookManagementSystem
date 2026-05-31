@@ -1,7 +1,9 @@
 package com.nuist.bookms.service.impl;
 
 import com.nuist.bookms.dao.UserDAO;
+import com.nuist.bookms.dao.UserRoleDAO;
 import com.nuist.bookms.dao.impl.UserDAOImpl;
+import com.nuist.bookms.dao.impl.UserRoleDAOImpl;
 import com.nuist.bookms.entity.User;
 import com.nuist.bookms.service.UserService;
 import com.nuist.bookms.util.MD5Util;
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private UserDAO userDAO = new UserDAOImpl();
+    private UserRoleDAO userRoleDAO = new UserRoleDAOImpl();
 
     @Override
     public boolean ifExist(String username) {
@@ -49,15 +52,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean hasPermission(User user, String permission) {
-
-        return false;
-    }
-
-    @Override
     public List<User> selectByPage(int pageNum, int pageSize) {
-        return List.of();
+        return userDAO.selectByPage(pageNum,pageSize);
     }
-
 
 }

@@ -14,15 +14,13 @@ public interface UserService {
     // 用户登录
     boolean login(String username, String password);
 
-    // 根据id查询用户信息
+    // 根据id查询用户
     User selectByUserId(Integer userId);
 
     // 修改用户信息(包括密码)
     boolean updateUser(User user);
 
-    // 判断用户是否有某个权限
-    boolean hasPermission(User user, String permission);
-
     // 分页查询用户列表
     List<User> selectByPage(int pageNum, int pageSize);
+
 }

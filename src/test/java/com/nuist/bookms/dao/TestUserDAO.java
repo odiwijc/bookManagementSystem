@@ -1,6 +1,5 @@
-package com.nuist.bookms;
+package com.nuist.bookms.dao;
 
-import com.nuist.bookms.dao.UserDAO;
 import com.nuist.bookms.dao.impl.UserDAOImpl;
 import com.nuist.bookms.entity.User;
 import com.nuist.bookms.util.DBUtil;

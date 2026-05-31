@@ -1,6 +1,5 @@
-package com.nuist.bookms;
+package com.nuist.bookms.dao;
 
-import com.nuist.bookms.dao.BookDAO;
 import com.nuist.bookms.dao.impl.BookDAOImpl;
 import com.nuist.bookms.entity.Book;
 import org.junit.jupiter.api.Test;
