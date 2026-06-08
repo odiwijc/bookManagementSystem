@@ -1,7 +1,6 @@
-package com.nuist.bookms;
+package com.nuist.bookms.service;
 
 import com.nuist.bookms.entity.User;
-import com.nuist.bookms.service.UserService;
 import com.nuist.bookms.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 

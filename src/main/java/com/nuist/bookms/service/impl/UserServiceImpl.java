@@ -20,15 +20,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean register(User user) {
+    public boolean ifExist(Integer userId) {
+        return userDAO.selectByUserId(userId) != null;
+    }
+
+    @Override
+    public int register(User user) {
         boolean isExist = ifExist(user.getUsername());
         // 已经有同名用户，不许注册
         if (isExist) {
-            return false;
+            return -1;
         }
         // 输入密码时加密
         user.setPassword(MD5Util.getMD5(user.getPassword()));
-        return userDAO.insert(user) > 0;
+        // 返回的是用户插入数据库中的主键id
+        return userDAO.insert(user);
     }
 
     @Override
@@ -53,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> selectByPage(int pageNum, int pageSize) {
-        return userDAO.selectByPage(pageNum,pageSize);
+        return userDAO.selectByPage(pageNum, pageSize);
     }
 
 }

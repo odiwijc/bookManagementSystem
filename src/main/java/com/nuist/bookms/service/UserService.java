@@ -7,9 +7,11 @@ import java.util.List;
 public interface UserService {
     // 判断用户是否存在
     boolean ifExist(String username);
+    // 重载方法 用id判断
+    boolean ifExist(Integer userId);
 
     // 用户注册
-    boolean register(User user);
+    int register(User user);
 
     // 用户登录
     boolean login(String username, String password);
@@ -22,5 +24,4 @@ public interface UserService {
 
     // 分页查询用户列表
     List<User> selectByPage(int pageNum, int pageSize);
-
 }

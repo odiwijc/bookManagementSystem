@@ -19,5 +19,5 @@ public class User {
     private String phone;
     private String email;
     private java.sql.Time registerTime;
-    private Integer status;
+    private Integer status; // 0:禁用 1:正常
 }

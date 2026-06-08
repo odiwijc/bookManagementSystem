@@ -2,16 +2,18 @@ package com.nuist.bookms.dao;
 
 import com.nuist.bookms.dao.impl.BorrowRecordDAOImpl;
 import com.nuist.bookms.entity.BorrowRecord;
+import com.nuist.bookms.util.DBUtil;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 public class TestBorrowRecordDAO {
     private BorrowRecordDAO borrowRecordDAO = new BorrowRecordDAOImpl();
 
     @Test
-    public void testInsert() {
+    public void testInsert() throws SQLException {
         BorrowRecord record = BorrowRecord.builder()
                 .userId(1)
                 .bookId(1)
@@ -22,12 +24,12 @@ public class TestBorrowRecordDAO {
                 .status(1)
                 .build();
         System.out.println(record);
-        int result = borrowRecordDAO.insert(record);
+        int result = borrowRecordDAO.insert(record, DBUtil.getConnection());
         System.out.println(result);
     }
 
     @Test
-    public void testUpdate() {
+    public void testUpdate() throws SQLException{
         BorrowRecord record = BorrowRecord.builder()
                 .recordId(10)
                 .userId(1)
@@ -38,7 +40,7 @@ public class TestBorrowRecordDAO {
                 .renewCount(1)
                 .status(1)
                 .build();
-        int result = borrowRecordDAO.update(record);
+        int result = borrowRecordDAO.update(record, DBUtil.getConnection());
         System.out.println(result);
     }
 
@@ -49,8 +51,8 @@ public class TestBorrowRecordDAO {
     }
 
     @Test
-    public void testSelectByUserId() {
-        List<BorrowRecord> records = borrowRecordDAO.selectByUserId(4, 1, 5);
+    public void testSelectByPageByUserId() {
+        List<BorrowRecord> records = borrowRecordDAO.selectByPageByUserId(4, 1, 5);
         System.out.println(records);
     }
 
@@ -109,5 +111,9 @@ public class TestBorrowRecordDAO {
         System.out.println(result);
     }
 
-
+    @Test
+    public void testSelectByPageByUserIdAndBookId() {
+        BorrowRecord record = borrowRecordDAO.selectByUserIdAndBookId(1, 1);
+        System.out.println(record);
+    }
 }

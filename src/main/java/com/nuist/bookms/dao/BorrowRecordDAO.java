@@ -2,22 +2,25 @@ package com.nuist.bookms.dao;
 
 import com.nuist.bookms.entity.BorrowRecord;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 
 public interface BorrowRecordDAO {
     // 新增借阅记录（借书时调用）
-    int insert(BorrowRecord record);
+    int insert(BorrowRecord record, Connection connection);
 
     // 更新借阅记录（还书、续借时修改状态status、实际还书日期return_date等）
-    int update(BorrowRecord record);
+    int update(BorrowRecord record, Connection connection);
 
     // 根据记录ID查询
     BorrowRecord selectById(Integer recordId);
 
+    // 根据用户id和书id查询
+    BorrowRecord selectByUserIdAndBookId(Integer userId, Integer bookId);
+
     // 分页查询某用户的借阅历史
-    List<BorrowRecord> selectByUserId(Integer userId, Integer pageNum, Integer pageSize);
+    List<BorrowRecord> selectByPageByUserId(Integer userId, Integer pageNum, Integer pageSize);
 
     // 统计某用户的借阅总记录数
     int selectCountByUserId(Integer userId);
@@ -37,7 +40,7 @@ public interface BorrowRecordDAO {
     // 管理员端分页查询所有借阅记录（按用户id、记录状态）
     List<BorrowRecord> selectAllByPage(Integer pageNum, Integer pageSize, BorrowRecord searchCondition);
 
-    // 管理员统计查询条件下的记录总数
+    // 管理员统计查询条件(借书人id，书id，记录状态)下的记录总数
     int selectAllCount(BorrowRecord searchCondition);
 
     // 查询某本书的总借阅次数

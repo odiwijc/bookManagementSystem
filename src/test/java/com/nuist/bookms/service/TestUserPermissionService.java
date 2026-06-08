@@ -1,6 +1,5 @@
-package com.nuist.bookms;
+package com.nuist.bookms.service;
 
-import com.nuist.bookms.service.UserPermissionService;
 import com.nuist.bookms.service.impl.UserPermissionServiceImpl;
 import org.junit.jupiter.api.Test;
 

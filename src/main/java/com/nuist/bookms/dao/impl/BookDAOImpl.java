@@ -105,6 +105,7 @@ public class BookDAOImpl implements BookDAO {
                         .publisher(rs.getString("publisher"))
                         .publishDate(rs.getDate("publish_date"))
                         .totalStock(rs.getInt("total_stock"))
+                        .availableStock(rs.getInt("available_stock"))
                         .coverUrl(rs.getString("cover_url"))
                         .status(rs.getInt("status"))
                         .version(rs.getInt("version"))
@@ -210,11 +211,10 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public int updateAvailableStock(int bookId, int delta, int version) {
+    public int updateAvailableStock(int bookId, int delta, int version, Connection connection) {
         int result = 0;
         String sql = "update book set available_stock = available_stock + ?, version = version + 1 where book_id = ? and version = ?";
-        try (Connection c = DBUtil.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, delta);
             ps.setInt(2, bookId);
             ps.setInt(3, version);

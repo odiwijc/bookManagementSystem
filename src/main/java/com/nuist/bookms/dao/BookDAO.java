@@ -2,6 +2,7 @@ package com.nuist.bookms.dao;
 
 import com.nuist.bookms.entity.Book;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface BookDAO {
@@ -25,7 +26,7 @@ public interface BookDAO {
 
     // 乐观锁扣减/归还库存
     // delta 是书的库存增量，正数表示借阅，负数表示归还
-    int updateAvailableStock(int bookId, int delta, int version);
+    int updateAvailableStock(int bookId, int delta, int version, Connection connection);
 
     // 悲观锁方式更新库存
     int updateAvailableStockWithPessimisticLock(int bookId, int delta);

@@ -20,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
                 "values(?,?,?,?,?,now(),?)";
 
         try (Connection c = DBUtil.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+             PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getUsername());
             ps.setString(2, MD5Util.getMD5(user.getPassword()));
             ps.setString(3, user.getRealName());
@@ -30,12 +30,20 @@ public class UserDAOImpl implements UserDAO {
 
 
             result = ps.executeUpdate();
+            if (result > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        user.setUserId(rs.getInt(1));
+                    }
+                }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return result;
+        // 返回用户id，用于登录
+        return user.getUserId();
     }
 
     // 根据用户名查询

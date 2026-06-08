@@ -10,11 +10,10 @@ import java.util.List;
 
 public class BorrowRecordDAOImpl implements BorrowRecordDAO {
     @Override
-    public int insert(BorrowRecord record) {
+    public int insert(BorrowRecord record, Connection connection) {
         int result = 0;
         String sql = "insert into borrow_record(user_id,book_id,borrow_date,due_date,return_date,renew_count,status) values(?,?,?,?,?,?,?)";
-        try (Connection c = DBUtil.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, record.getUserId());
             ps.setInt(2, record.getBookId());
             ps.setDate(3, record.getBorrowDate());
@@ -30,11 +29,10 @@ public class BorrowRecordDAOImpl implements BorrowRecordDAO {
     }
 
     @Override
-    public int update(BorrowRecord record) {
+    public int update(BorrowRecord record, Connection connection) {
         int result = 0;
         String sql = "update borrow_record set user_id=?,book_id=?,borrow_date=?,due_date=?,return_date=?,renew_count=?,status=? where record_id =?";
-        try (Connection c = DBUtil.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, record.getUserId());
             ps.setInt(2, record.getBookId());
             ps.setDate(3, record.getBorrowDate());
@@ -80,7 +78,7 @@ public class BorrowRecordDAOImpl implements BorrowRecordDAO {
     }
 
     @Override
-    public List<BorrowRecord> selectByUserId(Integer userId, Integer pageNum, Integer pageSize) {
+    public List<BorrowRecord> selectByPageByUserId(Integer userId, Integer pageNum, Integer pageSize) {
         List<BorrowRecord> records = new ArrayList<>();
 
         String sql = "select * from borrow_record where user_id = ? limit ?,?";
@@ -267,6 +265,9 @@ public class BorrowRecordDAOImpl implements BorrowRecordDAO {
             if (searchCondition.getUserId() != null) {
                 sql += " and user_id = " + searchCondition.getUserId();
             }
+            if (searchCondition.getBookId() != null) {
+                sql += " and book_id = " + searchCondition.getBookId();
+            }
             if (searchCondition.getStatus() != null) {
                 sql += " and status = " + searchCondition.getStatus();
             }
@@ -298,5 +299,33 @@ public class BorrowRecordDAOImpl implements BorrowRecordDAO {
             e.printStackTrace();
         }
         return count;
+    }
+
+    @Override
+    public BorrowRecord selectByUserIdAndBookId(Integer userId, Integer bookId) {
+        BorrowRecord record = null;
+        String sql = "select * from borrow_record where user_id = ? and book_id = ?";
+        try (Connection c = DBUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql);) {
+            ps.setInt(1, userId);
+            ps.setInt(2, bookId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                record = BorrowRecord.builder()
+                        .recordId(rs.getInt("record_id"))
+                        .userId(rs.getInt("user_id"))
+                        .bookId(rs.getInt("book_id"))
+                        .borrowDate(rs.getDate("borrow_date"))
+                        .dueDate(rs.getDate("due_date"))
+                        .returnDate(rs.getDate("return_date"))
+                        .renewCount(rs.getInt("renew_count"))
+                        .status(rs.getInt("status"))
+                        .build();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return record;
     }
 }

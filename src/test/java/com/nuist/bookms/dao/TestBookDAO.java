@@ -2,15 +2,17 @@ package com.nuist.bookms.dao;
 
 import com.nuist.bookms.dao.impl.BookDAOImpl;
 import com.nuist.bookms.entity.Book;
+import com.nuist.bookms.util.DBUtil;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class TestBookDAO {
     private BookDAO bookDAO = new BookDAOImpl();
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
         Book book = Book.builder().title("论语")
                 .isbn("123456789098765")
                 .author("孔子")
@@ -25,7 +27,7 @@ public class TestBookDAO {
     }
 
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         Book book = Book.builder().title("论语")
                 .isbn("123456789098765")
                 .author("孔龙")
@@ -41,25 +43,25 @@ public class TestBookDAO {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         int result = bookDAO.deleteById(10);
         System.out.println(result);
     }
 
     @Test
-    public void testUpdateStatus(){
-        int result = bookDAO.updateStatus(10,1);
+    public void testUpdateStatus() {
+        int result = bookDAO.updateStatus(10, 1);
         System.out.println(result);
     }
 
     @Test
-    public void testSelectById(){
+    public void testSelectById() {
         Book book = bookDAO.selectById(10);
         System.out.println(book);
     }
 
     @Test
-    public void testSelectByPage(){
+    public void testSelectByPage() {
         Book searchCondition = Book.builder()
                 .author("尔")
                 .status(1)
@@ -69,7 +71,7 @@ public class TestBookDAO {
     }
 
     @Test
-    public void testSelectCount(){
+    public void testSelectCount() {
         Book searchCondition = Book.builder()
                 .author("尔")
                 .status(1)
@@ -79,19 +81,20 @@ public class TestBookDAO {
     }
 
     @Test
-    public void testUpdateAvailableStock(){
-        int result = bookDAO.updateAvailableStock(10,1,0);
+    public void testUpdateAvailableStock() throws SQLException {
+        int version = bookDAO.selectById(10).getVersion();
+        int result = bookDAO.updateAvailableStock(10, 1, version, DBUtil.getConnection());
         System.out.println(result);
     }
 
     @Test
-    public void testUpdateAvailableStockWithPessimisticLock(){
-        int result = bookDAO.updateAvailableStockWithPessimisticLock(10,1);
+    public void testUpdateAvailableStockWithPessimisticLock() {
+        int result = bookDAO.updateAvailableStockWithPessimisticLock(10, 1);
         System.out.println(result);
     }
 
     @Test
-    public void testSelectTopBorrowed(){
+    public void testSelectTopBorrowed() {
         List<Book> list = bookDAO.selectTopBorrowed(5);
         System.out.println(list);
     }
